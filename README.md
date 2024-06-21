@@ -5,7 +5,7 @@
     [ ] Tester good/bad toast
     [ ] Landing page
     [ ] Courses page
-    [ ] Course groub page
+    [x] Course groub page
     [ ] Breadcrumbs
     [ ] Code cleaning
     [ ] Fix rendering html in markdown

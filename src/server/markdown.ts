@@ -51,7 +51,9 @@ async function readGroupData(
   }
 }
 
-async function getCourses(): Promise<(Course | CourseGroup)[]> {
+async function getCourses(
+  groupLabel?: string,
+): Promise<(Course | CourseGroup)[] | CourseGroup> {
   const coursesDir = "./courses";
   const groups: CourseGroup[] = [];
   const courses: Course[] = [];
@@ -76,6 +78,18 @@ async function getCourses(): Promise<(Course | CourseGroup)[]> {
 
     // Sort courses within each group by order
     groups.forEach((group) => group.courses.sort((a, b) => a.order - b.order));
+
+    // Filter courses by groupLabel if provided
+    if (groupLabel) {
+      const filteredGroup = groups.find(
+        (group) => group.lableSlug === groupLabel,
+      );
+      if (filteredGroup) {
+        return filteredGroup;
+      } else {
+        return [];
+      }
+    }
 
     // Merge groups and individual courses
     const allCourses: (Course | CourseGroup)[] = [...groups, ...courses];
