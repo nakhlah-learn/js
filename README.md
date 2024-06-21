@@ -6,7 +6,7 @@
     [ ] Landing page
     [ ] Courses page
     [x] Course groub page
-    [ ] Breadcrumbs
+    [x] Breadcrumbs
     [ ] Code cleaning
     [ ] Fix rendering html in markdown
     [ ] CSS markdown font color issue on old borwsers

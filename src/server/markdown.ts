@@ -101,4 +101,13 @@ async function getCourses(
   }
 }
 
-export { getCourses };
+async function getGroubData(filePath: string): Promise<string> {
+  const jsonData = await fs.readFile(
+    path.join(process.cwd(), "courses", `${filePath}/_data.json`),
+    "utf-8",
+  );
+  const { label, lableSlug, order } = JSON.parse(jsonData) as CourseGroup;
+  return label;
+}
+
+export { getCourses, getGroubData };

@@ -1,4 +1,6 @@
-import type { CourseHeader } from "./types";
+import type { CourseHeader, GroubLabel } from "./types";
+
+import { getGroubData } from "./markdown";
 
 import fs from "fs-extra";
 import path from "path";
@@ -12,12 +14,21 @@ import remarkHighlight from "remark-highlight.js";
 
 export async function parseMarkdownFromFile(
   filePath: string,
-): Promise<[string, CourseHeader]> {
+): Promise<[string, CourseHeader, GroubLabel | undefined]> {
+  let dirLabel: GroubLabel | undefined = undefined;
+
   // Read the markdown file content
   const markdownFileContent = await fs.readFile(
     path.join(process.cwd(), "courses", `${filePath}.md`),
     "utf-8",
   );
+
+  if (filePath.includes("/")) {
+    const groubDir = filePath.split("/")[0];
+    if (groubDir) {
+      dirLabel = { label: await getGroubData(groubDir), lableSlug: groubDir };
+    }
+  }
 
   // Extract front matter from the markdown content
   const { content: markdownContent, data } = matter(markdownFileContent);
@@ -29,5 +40,5 @@ export async function parseMarkdownFromFile(
     .use(gfm) // Enable GitHub Flavored Markdown
     .process(markdownContent);
 
-  return [result.toString(), data as CourseHeader];
+  return [result.toString(), data as CourseHeader, dirLabel];
 }

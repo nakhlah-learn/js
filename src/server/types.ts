@@ -13,6 +13,11 @@ export interface CourseGroup {
   courses: Course[];
 }
 
+export interface GroubLabel {
+  label: string;
+  lableSlug: string;
+}
+
 export interface CourseHeader {
   title: string;
   snippet: string;

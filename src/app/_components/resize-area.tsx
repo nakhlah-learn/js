@@ -1,29 +1,39 @@
 "use client";
-import type { CourseHeader } from "@/server/types";
+
+import type { CourseHeader, GroubLabel } from "@/server/types";
+import type { ImperativePanelHandle } from "react-resizable-panels";
 
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 
-import type { ImperativePanelHandle } from "react-resizable-panels";
 import { Button } from "@/components/ui/button";
 import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-
 import { Separator } from "@/components/ui/separator";
 import Highlighter from "@/app/_components/highlighter";
 import EditorSection from "@/app/_components/editor";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from "@/components/ui/breadcrumb";
 
 interface ResizeAreaProps {
   markdownContent: string;
   header: CourseHeader;
+  dirLabel: GroubLabel | undefined;
 }
 
 export default function ResizeArea({
   markdownContent,
   header,
+  dirLabel,
 }: ResizeAreaProps) {
   const [isSmallScreen, setIsSmallScreen] = useState(false);
   const [buttonLabel, setButtonLabel] = useState("فتح المحرر");
@@ -76,12 +86,32 @@ export default function ResizeArea({
       >
         <ResizablePanel ref={contentRef} defaultSize={50}>
           <div dir="ltr" className="h-full w-full overflow-auto">
-            <div className="w-full px-2 pt-2" dir="rtl">
-              <Link href="/courses">
-                <Button className="mb-2" variant="outline">
-                  الرجوع
-                </Button>
-              </Link>
+            <div className="flex items-center px-2 py-2" dir="rtl">
+              <Breadcrumb>
+                <BreadcrumbList>
+                  <BreadcrumbItem>
+                    <BreadcrumbLink>
+                      <Link href="/courses">الصفحة الرئيسية</Link>
+                    </BreadcrumbLink>
+                  </BreadcrumbItem>
+                  {dirLabel && (
+                    <>
+                      <BreadcrumbSeparator />
+                      <BreadcrumbItem>
+                        <BreadcrumbLink>
+                          <Link href={`/courses/${dirLabel.lableSlug}`}>
+                            {dirLabel.label}
+                          </Link>
+                        </BreadcrumbLink>
+                      </BreadcrumbItem>
+                    </>
+                  )}
+                  <BreadcrumbSeparator />
+                  <BreadcrumbItem>
+                    <BreadcrumbPage>{header.title}</BreadcrumbPage>
+                  </BreadcrumbItem>
+                </BreadcrumbList>
+              </Breadcrumb>
             </div>
             <Separator className="h-[2px]" />
             <div dir="rtl" className="p-4">

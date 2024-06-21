@@ -10,7 +10,7 @@ interface Props {
 }
 
 export default async function HomePage({ params }: Props) {
-  const [markdownContent, header] = await parseMarkdownFromFile(
+  const [markdownContent, header, dirLabel] = await parseMarkdownFromFile(
     params.slug.join("/"),
   );
 
@@ -21,7 +21,11 @@ export default async function HomePage({ params }: Props) {
         href="https://cdn.jsdelivr.net/npm/highlightjs-themes@1.0.0/androidstudio.css"
       />
       <main className="h-full-minus-bar">
-        <ResizeArea markdownContent={markdownContent} header={header} />
+        <ResizeArea
+          markdownContent={markdownContent}
+          header={header}
+          dirLabel={dirLabel}
+        />
       </main>
     </>
   );
