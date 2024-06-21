@@ -11,9 +11,6 @@
     [ ] Fix rendering html in markdown
     [ ] CSS markdown font color issue on old borwsers
     [ ] Loading animation page
-    [ ] Move resize to client side ( to handle auto size [full on mobile])
-    [ ] Improve phone experience
-
-# DONE
-
+    [x] Move resize to client side ( to handle auto size [full on mobile])
     [x] Code execution
+    [ ] Improve phone experience
