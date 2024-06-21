@@ -10,19 +10,24 @@ interface Props {
 }
 
 export default async function HomePage({ params }: Props) {
-  const courses = (await getCourses(params.slug)) as CourseGroup;
+  const course = (await getCourses(params.slug)) as CourseGroup;
+
+  if (!course.courses) {
+    // TODO: return 404
+    return;
+  }
 
   return (
     <main className="container mx-auto px-4 py-8">
       <Accordion type="single" collapsible className="flex flex-col gap-2">
-        {courses.courses.map((course) => {
+        {course.courses.map((c) => {
           return (
             <div
-              key={course.slug}
+              key={c.slug}
               style={{ order: course.order }}
               className="rounded border p-2"
             >
-              <CourseBox course={course} groupLabel={courses.lableSlug} />
+              <CourseBox course={c} groupLabel={course.lableSlug} />
             </div>
           );
         })}

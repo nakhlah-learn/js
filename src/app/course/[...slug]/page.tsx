@@ -10,6 +10,9 @@ interface Props {
 }
 
 export default async function HomePage({ params }: Props) {
+  // TODO: handle if file not found will raise error
+  // return 404
+
   const [markdownContent, header, dirLabel] = await parseMarkdownFromFile(
     params.slug.join("/"),
   );
