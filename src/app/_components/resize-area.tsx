@@ -1,4 +1,5 @@
 "use client";
+import type { CourseHeader } from "@/server/types";
 
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
@@ -14,8 +15,6 @@ import {
 import { Separator } from "@/components/ui/separator";
 import Highlighter from "@/app/_components/highlighter";
 import EditorSection from "@/app/_components/editor";
-
-import type { CourseHeader } from "@/server/types";
 
 interface ResizeAreaProps {
   markdownContent: string;

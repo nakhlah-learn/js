@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 
 export default function TopNav() {
@@ -10,7 +9,7 @@ export default function TopNav() {
       <nav className="z-40 flex items-center justify-between p-4" dir="ltr">
         <Link
           href={"/"}
-          className="hover:text-primary flex items-center gap-2 hover:animate-pulse"
+          className="flex items-center gap-2 hover:animate-pulse hover:text-primary"
         >
           <Image
             title="NakhlahJS logo"

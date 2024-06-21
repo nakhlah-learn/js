@@ -1,7 +1,7 @@
+import type { CourseHeader } from "./types";
+
 import fs from "fs-extra";
 import path from "path";
-
-import type { CourseHeader } from "./types";
 
 import matter from "gray-matter";
 import { remark } from "remark";
